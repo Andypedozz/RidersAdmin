@@ -1,6 +1,8 @@
 package view.orders;
 
 import java.awt.BorderLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -81,7 +83,7 @@ public class PanelOrdersTable extends MyPanel {
 		});
 		
 		this.updateOrders.addActionListener(e -> {
-			controller.fetchOrders();
+			controller.readOrdersJson();
 			updateFields();
 		});
 	}
@@ -95,6 +97,10 @@ public class PanelOrdersTable extends MyPanel {
 			list.add(order);
 		});
 		loadOrders(list);
+	}
+	
+	public OrdersTable getTable() {
+		return this.table;
 	}
 	
 	private void loadOrders(List<Order> orders) {

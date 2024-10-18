@@ -11,8 +11,10 @@ public class Model {
 	private HashMap<Integer, Order> orders;
 	private HashMap<Integer, Rider> riders;
 	private HashMap<Integer, Restaurant> restaurants;
+	private boolean apiMode;
 	
 	public Model() {
+		this.apiMode = true;
 		this.orders = new HashMap<Integer, Order>();
 		this.riders = new HashMap<Integer, Rider>();
 		this.restaurants = new HashMap<Integer, Restaurant>();
@@ -50,32 +52,31 @@ public class Model {
 	/**
 	 * 	Deletes the order from the shared API Db
 	 */
-	public boolean deleteOrder(Order order) {
+	public boolean removeOrder(Order order) {
 		boolean result = false;
-		try {
-			URL url = new URL("http://localhost:3001/orders/delete/"+order.getId());
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("DELETE");
-			conn.connect();
-			
-			// Getting the response code
-			int responseCode = conn.getResponseCode();
-			if(responseCode == 200) {
-				result = true;
+		if(apiMode) {
+			try {
+				URL url = new URL("http://localhost:3001/orders/delete/"+order.getId());
+				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+				conn.setRequestMethod("DELETE");
+				conn.connect();
+				
+				// Getting the response code
+				int responseCode = conn.getResponseCode();
+				if(responseCode == 200) {
+					result = true;
+					this.orders.remove(order.getId());
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
 			}
-		}catch(Exception e) {
-			e.printStackTrace();
+		}else {
+			this.orders.remove(order.getId());
+			result = true;
 		}
 		return result;
 	}
 	
-	/**
-	 *  Deletes the order only from the fetched data
-	 */
-	public void removeOrder(Order order) {
-		this.orders.remove(order.getId());
-	}
-
 	public void loadOrders(List<Order> orders) {
 		orders.forEach((order) -> {
 			this.orders.put(order.getId(), order);
@@ -96,5 +97,13 @@ public class Model {
 
 	public Order getOrder(int id) {
 		return this.orders.get(id);
+	}
+	
+	public boolean isApiMode() {
+		return this.apiMode;
+	}
+	
+	public void setApiMode(boolean b) {
+		this.apiMode = b;
 	}
 }

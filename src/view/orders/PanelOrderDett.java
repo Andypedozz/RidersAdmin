@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
 import controller.Controller;
+import model.Order;
 
 public class PanelOrderDett extends MyPanel {
 	private Controller controller;
@@ -23,7 +24,6 @@ public class PanelOrderDett extends MyPanel {
 	@Override
 	public void updateFields() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -36,6 +36,11 @@ public class PanelOrderDett extends MyPanel {
 	public void clear() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void loadData(Order order) {
+		this.panelOrder.loadData(order);
+		this.panelProducts.loadData(order);
 	}
 
 }

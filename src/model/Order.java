@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class Order {
 	private final int id;
 	private final String ristorante;
@@ -7,6 +9,7 @@ public class Order {
 	private String consegna;
 	private String indirizzo;
 	private boolean completed;
+	private List<Prodotto> listaProdotti;
 	
 	public Order(int id, String ristorante, String ritiro, String consegna, String indirizzo) {
 		super();
@@ -26,6 +29,10 @@ public class Order {
 		this.consegna = consegna;
 		this.indirizzo = indirizzo;
 		this.completed = completed;
+	}
+	
+	public List<Prodotto> getListaProdotti() {
+		return this.listaProdotti;
 	}
 
 	public int getId() {

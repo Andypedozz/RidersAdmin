@@ -1,8 +1,11 @@
 package view.orders;
 
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import controller.Controller;
+import model.Order;
 import view.MyPanel;
 
 public class PanelOrders extends MyPanel {
@@ -17,12 +20,27 @@ public class PanelOrders extends MyPanel {
 		this.panelTable = new PanelOrdersTable();
 		this.add(panelDett);
 		this.add(panelTable);
+		initListeners();
+	}
+	
+	private void initListeners() {
+		this.panelTable.getTable().addMouseListener(new MouseAdapter() {
+		
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Order order = panelTable.getTable().getSelected();
+				if(order != null) {
+					panelDett.loadData(order);
+				}
+			}
+		
+		});
 	}
 	
 	@Override
 	public void updateFields() {
-		// TODO Auto-generated method stub
-		
+		this.panelDett.updateFields();
+		this.panelTable.updateFields();
 	}
 
 	@Override

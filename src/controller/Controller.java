@@ -32,7 +32,8 @@ public class Controller {
 	
 	public void start() {
 		this.model = new Model();
-		fetchOrders();
+		this.model.setApiMode(false);
+		readOrdersJson();
 		fetchRiders();
 		this.view = new View();
 	}
@@ -94,8 +95,8 @@ public class Controller {
 		}
 	}
 	
-	private void readOrdersJson() {
-		String fileName = "orders.json";
+	public void readOrdersJson() {
+		String fileName = "resources\\db\\orders.json";
 		JSONParser parser = new JSONParser();
 
 		try {
@@ -136,9 +137,8 @@ public class Controller {
 	}
 	
 	public void removeOrder(Order order) {
-		boolean result = this.model.deleteOrder(order);
+		boolean result = this.model.removeOrder(order);
 		if(result) {
-			this.model.getOrders().remove(order.getId());
 			this.view.getMainMenu().getConsolePanel().append("Deleted order "+order.getId());
 		}else {
 			this.view.getMainMenu().getConsolePanel().append("Error in HTTP delete request");

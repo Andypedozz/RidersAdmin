@@ -13,6 +13,7 @@ import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 
 import controller.Controller;
+import model.Order;
 
 public class PanelOrderDettGeneral extends MyPanel {
 	private Controller controller;
@@ -175,6 +176,15 @@ public class PanelOrderDettGeneral extends MyPanel {
 	public void clear() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void loadData(Order order) {
+		this.textFieldCodice.setText(String.valueOf(order.getId()));
+		this.textFieldRistorante.setText(order.getRistorante());
+		this.textFieldOrarioRitiro.setText(order.getRitiro());
+		this.textFieldOrarioConsegna.setText(order.getConsegna());
+		this.textFieldIndirizzoConsegna.setText(order.getIndirizzo());
+		this.checkBoxCompletato.setSelected(order.isCompleted());
 	}
 
 }
