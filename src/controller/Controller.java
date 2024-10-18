@@ -33,7 +33,7 @@ public class Controller {
 	public void start() {
 		this.model = new Model();
 		this.model.setApiMode(false);
-		readOrdersJson();
+		this.model.loadOrdersData();
 		fetchRiders();
 		this.view = new View();
 	}
@@ -52,73 +52,6 @@ public class Controller {
 		riders.add(new Rider(9, "Mattia", "Moto", true));
 		this.model.loadRiders(riders);
 	}
-
-	public void fetchOrders() {
-		try {
-			URL url = new URL("http://localhost:3001/orders");
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
-			conn.connect();
-			
-			// Getting the response code
-			int responseCode = conn.getResponseCode();
-			if(responseCode != 200) {
-				throw new RuntimeException("HttpResponseCode: "+ responseCode);
-			}else {
-				String inline = "";
-				Scanner scanner = new Scanner(url.openStream());
-				
-				// Write all the JSON data into a string
-				while(scanner.hasNext()) {
-					inline += scanner.nextLine();
-				}
-				
-				scanner.close();
-				
-				JSONParser parse = new JSONParser();
-				JSONArray jsonOrders = (JSONArray) parse.parse(inline);
-				List<Order> orders = new LinkedList<Order>();
-				for(int i = 0; i < jsonOrders.size(); i++) {
-					JSONObject jsonOrder = (JSONObject) jsonOrders.get(i);
-					int id = Integer.valueOf((String)jsonOrder.get("id"));
-					String restaurant = (String) jsonOrder.get("ristorante");
-					String ritiro = (String) jsonOrder.get("ritiro");
-					String consegna = (String) jsonOrder.get("consegna");
-					String indirizzo = (String) jsonOrder.get("indirizzo");
-					Order order = new Order(id, restaurant, ritiro, consegna, indirizzo);
-					orders.add(order);
-				}
-				this.model.loadOrders(orders);
-			}
-		}catch(Exception e) {
-			Global.showWarning("API di caricamento dati non attiva o connessione assente!");
-		}
-	}
-	
-	public void readOrdersJson() {
-		String fileName = "resources\\db\\orders.json";
-		JSONParser parser = new JSONParser();
-
-		try {
-			FileReader reader = new FileReader(fileName);
-			Object obj = parser.parse(reader);
-			JSONArray jsonOrders = (JSONArray) obj;
-			List<Order> orders = new LinkedList<Order>();
-			for(int i = 0; i < jsonOrders.size(); i++) {
-				JSONObject jsonOrder = (JSONObject) jsonOrders.get(i);
-				int id = Integer.valueOf((String)jsonOrder.get("id"));
-				String restaurant = (String) jsonOrder.get("ristorante");
-				String ritiro = (String) jsonOrder.get("ritiro");
-				String consegna = (String) jsonOrder.get("consegna");
-				String indirizzo = (String) jsonOrder.get("indirizzo");
-				Order order = new Order(id, restaurant, ritiro, consegna, indirizzo);
-				orders.add(order);
-			}
-			this.model.loadOrders(orders);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
 	
 	public HashMap<Integer, Order> getOrders() {
 		return this.model.getOrders();
@@ -134,6 +67,10 @@ public class Controller {
 	
 	public List<Rider> getFreeRiders() {
 		return this.model.getFreeRiders();
+	}
+	
+	public void loadOrders() {
+		this.model.loadOrdersData();
 	}
 	
 	public void removeOrder(Order order) {

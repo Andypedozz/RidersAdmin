@@ -1,5 +1,6 @@
 package model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Order {
@@ -12,23 +13,33 @@ public class Order {
 	private List<Prodotto> listaProdotti;
 	
 	public Order(int id, String ristorante, String ritiro, String consegna, String indirizzo) {
-		super();
 		this.id = id;
 		this.ristorante = ristorante;
 		this.ritiro = ritiro;
 		this.consegna = consegna;
 		this.indirizzo = indirizzo;
 		this.completed = false;
+		this.listaProdotti = new LinkedList<Prodotto>();
 	}
 	
 	public Order(int id, String ristorante, String ritiro, String consegna, String indirizzo, boolean completed) {
-		super();
 		this.id = id;
 		this.ristorante = ristorante;
 		this.ritiro = ritiro;
 		this.consegna = consegna;
 		this.indirizzo = indirizzo;
 		this.completed = completed;
+		this.listaProdotti = new LinkedList<Prodotto>();
+	}
+	
+	public Order(int id, String ristorante, String ritiro, String consegna, String indirizzo, boolean completed, List<Prodotto> prodotti) {
+		this.id = id;
+		this.ristorante = ristorante;
+		this.ritiro = ritiro;
+		this.consegna = consegna;
+		this.indirizzo = indirizzo;
+		this.completed = completed;
+		this.listaProdotti = prodotti;
 	}
 	
 	public List<Prodotto> getListaProdotti() {

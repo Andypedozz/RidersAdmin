@@ -83,7 +83,7 @@ public class PanelOrdersTable extends MyPanel {
 		});
 		
 		this.updateOrders.addActionListener(e -> {
-			controller.readOrdersJson();
+			controller.loadOrders();
 			updateFields();
 		});
 	}
