@@ -166,42 +166,22 @@ public class Model {
 		}
 	}
 	
-	private void readOrdersJson() {
-		String fileName = "resources\\db\\orders.json";
-		JSONParser parser = new JSONParser();
-
-		try {
-			FileReader reader = new FileReader(fileName);
-			Object obj = parser.parse(reader);
-			JSONArray jsonOrders = (JSONArray) obj;
-			List<Order> orders = new LinkedList<Order>();
-			for(int i = 0; i < jsonOrders.size(); i++) {
-				JSONObject jsonOrder = (JSONObject) jsonOrders.get(i);
-				int id = Integer.valueOf((String)jsonOrder.get("id"));
-				String restaurant = (String) jsonOrder.get("ristorante");
-				String ritiro = (String) jsonOrder.get("ritiro");
-				String consegna = (String) jsonOrder.get("consegna");
-				String indirizzo = (String) jsonOrder.get("indirizzo");
-				JSONArray productsOrder = (JSONArray) jsonOrder.get("prodotti");
-				List<Prodotto> prodotti = new LinkedList<Prodotto>();
-				for(int j = 0; j < productsOrder.size(); j++) {
-					JSONObject product = (JSONObject) productsOrder.get(j);
-					int idProdotto = Integer.parseInt((String) product.get("id"));
-					String nome = (String) product.get("nome");
-					int quantita = Integer.valueOf((String) product.get("quantita"));
-					double prezzo = Double.parseDouble((String) product.get("prezzo"));
-					Prodotto prodotto = new Prodotto(idProdotto, nome, quantita, prezzo);
-					prodotti.add(prodotto);
-				}
-				String note = (String) jsonOrder.get("note");
-				Order order = new Order(id, restaurant, ritiro, consegna, indirizzo, false, prodotti,note);
-				orders.add(order);
-			}
-			loadOrders(orders);
-		}catch(Exception e) {
-			e.printStackTrace();
+	public void loadRestaurantsData() {
+		if(this.apiMode) {
+			fetchRestaurants();
+		}else {
+			readRestaurantsJson();
 		}
 	}
+	
+	private void fetchRestaurants() {
+		
+	}
+	
+	private void fetchRiders() {
+		
+	}
+
 
 	public void loadRidersData() {
 		if(this.apiMode) {
@@ -211,77 +191,108 @@ public class Model {
 		}
 	}
 	
-	public void loadRestaurantsData() {
-		if(this.apiMode) {
-			fetchRestaurants();
-		}else {
-			readRestaurantsJson();
+	private void readOrdersJson() {
+		String[] fileNames = {"resources\\db\\orders.json","db\\orders.json"};
+		JSONParser parser = new JSONParser();
+		
+		for(String filename : fileNames) {
+			try {
+				FileReader reader = new FileReader(filename);
+				Object obj = parser.parse(reader);
+				JSONArray jsonOrders = (JSONArray) obj;
+				List<Order> orders = new LinkedList<Order>();
+				for(int i = 0; i < jsonOrders.size(); i++) {
+					JSONObject jsonOrder = (JSONObject) jsonOrders.get(i);
+					int id = Integer.valueOf((String)jsonOrder.get("id"));
+					String restaurant = (String) jsonOrder.get("ristorante");
+					String ritiro = (String) jsonOrder.get("ritiro");
+					String consegna = (String) jsonOrder.get("consegna");
+					String indirizzo = (String) jsonOrder.get("indirizzo");
+					JSONArray productsOrder = (JSONArray) jsonOrder.get("prodotti");
+					List<Prodotto> prodotti = new LinkedList<Prodotto>();
+					for(int j = 0; j < productsOrder.size(); j++) {
+						JSONObject product = (JSONObject) productsOrder.get(j);
+						int idProdotto = Integer.parseInt((String) product.get("id"));
+						String nome = (String) product.get("nome");
+						int quantita = Integer.valueOf((String) product.get("quantita"));
+						double prezzo = Double.parseDouble((String) product.get("prezzo"));
+						Prodotto prodotto = new Prodotto(idProdotto, nome, quantita, prezzo);
+						prodotti.add(prodotto);
+					}
+					String note = (String) jsonOrder.get("note");
+					Order order = new Order(id, restaurant, ritiro, consegna, indirizzo, false, prodotti,note);
+					orders.add(order);
+				}
+				loadOrders(orders);
+				break;
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
-
-	private void fetchRestaurants() {
-		
-	}
-
-	private void fetchRiders() {
-		
-	}
+	
 	
 	private void readRidersJson() {
-		String fileName = "resources\\db\\riders.json";
+		String[] fileNames = {"resources\\db\\riders.json","db\\riders.json"};
 		JSONParser parser = new JSONParser();
 
-		try {
-			FileReader reader = new FileReader(fileName);
-			Object obj = parser.parse(reader);
-			JSONArray jsonRiders = (JSONArray) obj;
-			List<Rider> riders = new LinkedList<Rider>();
-			for(int i = 0; i < jsonRiders.size(); i++) {
-				JSONObject jsonRider = (JSONObject) jsonRiders.get(i);
-				int id = Integer.valueOf((String)jsonRider.get("id"));
-				String nome = (String) jsonRider.get("nome");
-				String mezzo = (String) jsonRider.get("mezzo");
-				boolean libero = Boolean.valueOf((String) jsonRider.get("libero"));
-				Rider rider = new Rider(id, nome, mezzo, libero);
-				riders.add(rider);
+		for(String filename : fileNames) {
+			try {
+				FileReader reader = new FileReader(filename);
+				Object obj = parser.parse(reader);
+				JSONArray jsonRiders = (JSONArray) obj;
+				List<Rider> riders = new LinkedList<Rider>();
+				for(int i = 0; i < jsonRiders.size(); i++) {
+					JSONObject jsonRider = (JSONObject) jsonRiders.get(i);
+					int id = Integer.valueOf((String)jsonRider.get("id"));
+					String nome = (String) jsonRider.get("nome");
+					String mezzo = (String) jsonRider.get("mezzo");
+					boolean libero = Boolean.valueOf((String) jsonRider.get("libero"));
+					Rider rider = new Rider(id, nome, mezzo, libero);
+					riders.add(rider);
+				}
+				loadRiders(riders);
+				break;
+			}catch(Exception e) {
+				e.printStackTrace();
 			}
-			loadRiders(riders);
-		}catch(Exception e) {
-			e.printStackTrace();
 		}
 	}
 	
 	private void readRestaurantsJson() {
-		String fileName = "resources\\db\\restaurants.json";
+		String[] fileNames = {"resources\\db\\restaurants.json","db\\restaurants.json"};
 		JSONParser parser = new JSONParser();
 
-		try {
-			FileReader reader = new FileReader(fileName);
-			Object obj = parser.parse(reader);
-			JSONArray jsonRestaurants = (JSONArray) obj;
-			List<Restaurant> restaurants = new LinkedList<Restaurant>();
-			for(int i = 0; i < jsonRestaurants.size(); i++) {
-				JSONObject jsonRestaurant = (JSONObject) jsonRestaurants.get(i);
-				int idRistorante = Integer.valueOf((String)jsonRestaurant.get("id"));
-				String name = (String) jsonRestaurant.get("nome");
-				String indirizzo = (String) jsonRestaurant.get("indirizzo");
-				JSONArray productsOrder = (JSONArray) jsonRestaurant.get("prodotti");
-				List<Prodotto> prodotti = new LinkedList<Prodotto>();
-				for(int j = 0; j < productsOrder.size(); j++) {
-					JSONObject product = (JSONObject) productsOrder.get(j);
-					int idProdotto = Integer.valueOf((String) product.get("id"));
-					String nome = (String) product.get("nome");
-					double prezzo = Double.parseDouble((String) product.get("prezzo"));
-					String descrizione = (String) product.get("descrizione");
-					Prodotto prodotto = new Prodotto(idProdotto, nome, prezzo, descrizione);
-					prodotti.add(prodotto);
+		for(String filename : fileNames) {
+			try {
+				FileReader reader = new FileReader(filename);
+				Object obj = parser.parse(reader);
+				JSONArray jsonRestaurants = (JSONArray) obj;
+				List<Restaurant> restaurants = new LinkedList<Restaurant>();
+				for(int i = 0; i < jsonRestaurants.size(); i++) {
+					JSONObject jsonRestaurant = (JSONObject) jsonRestaurants.get(i);
+					int idRistorante = Integer.valueOf((String)jsonRestaurant.get("id"));
+					String name = (String) jsonRestaurant.get("nome");
+					String indirizzo = (String) jsonRestaurant.get("indirizzo");
+					JSONArray productsOrder = (JSONArray) jsonRestaurant.get("prodotti");
+					List<Prodotto> prodotti = new LinkedList<Prodotto>();
+					for(int j = 0; j < productsOrder.size(); j++) {
+						JSONObject product = (JSONObject) productsOrder.get(j);
+						int idProdotto = Integer.valueOf((String) product.get("id"));
+						String nome = (String) product.get("nome");
+						double prezzo = Double.parseDouble((String) product.get("prezzo"));
+						String descrizione = (String) product.get("descrizione");
+						Prodotto prodotto = new Prodotto(idProdotto, nome, prezzo, descrizione);
+						prodotti.add(prodotto);
+					}
+					Restaurant restaurant = new Restaurant(idRistorante, name, indirizzo, prodotti);
+					restaurants.add(restaurant);
 				}
-				Restaurant restaurant = new Restaurant(idRistorante, name, indirizzo, prodotti);
-				restaurants.add(restaurant);
+				loadRestaurants(restaurants);
+				break;
+			}catch(Exception e) {
+				e.printStackTrace();
 			}
-			loadRestaurants(restaurants);
-		}catch(Exception e) {
-			e.printStackTrace();
 		}
 	}
 
