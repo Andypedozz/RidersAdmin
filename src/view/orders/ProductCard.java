@@ -85,11 +85,13 @@ public class ProductCard extends JPanel {
 	}
 	
 	public void loadData(Prodotto prodotto) {
+		this.textFieldCodice.setText(String.valueOf(prodotto.getId()));
 		this.textFieldProdotto.setText(prodotto.getName());
-		this.textFieldPrezzo.setText(String.valueOf(prodotto.getPrezzo()));
+		this.textFieldPrezzo.setText("€"+String.valueOf(prodotto.getPrezzo()));
 	}
 	
 	public void clear() {
+		this.textFieldCodice.setText("");
 		this.textFieldProdotto.setText("");
 		this.textFieldPrezzo.setText("");
 	}

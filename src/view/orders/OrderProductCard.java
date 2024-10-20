@@ -30,6 +30,8 @@ public class OrderProductCard extends ProductCard {
 		gbc_textFieldQuantita.gridx = 3;
 		gbc_textFieldQuantita.gridy = 4;
 		add(textFieldQuantita, gbc_textFieldQuantita);
+		
+		this.textFieldQuantita.setEditable(false);
 	}
 	
 	@Override

@@ -20,6 +20,7 @@ public class PanelRestaurants extends MyPanel {
 		this.panelTable = new PanelRestaurantsTable();
 		this.getContentPane().add(panelDett);
 		this.getContentPane().add(panelTable);
+		initListeners();
 	}
 	
 	private void initListeners() {

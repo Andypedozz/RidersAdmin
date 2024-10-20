@@ -10,10 +10,11 @@ import view.NonEditableTableModel;
 
 public class OrdersTable extends JTable {
 	private static final int CODICE = 0;
-	private static final int RISTORANTE = 1;
-	private static final int RITIRO = 2;
-	private static final int CONSEGNA = 3;
-	private static final int INDIRIZZO = 4;
+	private static final int NOMECOGNOME = 1;
+	private static final int RISTORANTE = 2;
+	private static final int RITIRO = 3;
+	private static final int CONSEGNA = 4;
+	private static final int INDIRIZZO = 5;
 	
 	private NonEditableTableModel tableModel;
 	
@@ -32,6 +33,7 @@ public class OrdersTable extends JTable {
 	
 	private void init() {
 		tableModel.addColumn("Codice");
+		tableModel.addColumn("Nome e Cognome");
 		tableModel.addColumn("Ristorante");
 		tableModel.addColumn("Ritiro");
 		tableModel.addColumn("Consegna");
@@ -53,7 +55,7 @@ public class OrdersTable extends JTable {
 	
 	public void loadRows(List<Order> orders) {
 		for(Order order : orders) {
-			Object[] obj = {order.getId(), order.getRistorante(), order.getRitiro(), order.getConsegna(), order.getIndirizzo(), (order.isCompleted())? "Completato" : "Non completato"};
+			Object[] obj = {order.getId(), order.getNomeCognome(), order.getRistorante(), order.getRitiro(), order.getConsegna(), order.getIndirizzo(), (order.isCompleted())? "Completato" : "Non completato"};
 			tableModel.addRow(obj);
 		}
 	}
@@ -69,11 +71,12 @@ public class OrdersTable extends JTable {
 
 	private Order getOrderAt(int selectedRow) {
 		int id = (int)this.getValueAt(selectedRow, CODICE);
+		String nome = (String) this.getValueAt(selectedRow, NOMECOGNOME);
 		String ristorante = (String) this.getValueAt(selectedRow, RISTORANTE);
 		String ritiro = (String) this.getValueAt(selectedRow, RITIRO);
 		String consegna = (String) this.getValueAt(selectedRow, CONSEGNA);
 		String indirizzo = (String) this.getValueAt(selectedRow, INDIRIZZO);
-		Order order = new Order(id, ristorante, ritiro, consegna, indirizzo);
+		Order order = new Order(id, nome, ristorante, ritiro, consegna, indirizzo, -1, null, null, null, null, false);
 		return order;
 	}
 	

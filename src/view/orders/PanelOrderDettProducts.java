@@ -16,7 +16,6 @@ import model.Prodotto;
 import view.MyPanel;
 
 public class PanelOrderDettProducts extends MyPanel {
-	private Controller controller;
 	private JScrollPane scrollPane;
 	private JPanel dataPanel;
 	

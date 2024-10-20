@@ -20,6 +20,10 @@ public class Prodotto {
 		this.prezzo = prezzo;
 		this.descrizione = descrizione;
 	}
+	
+	public int getId() {
+		return this.id;
+	}
 
 	public String getName() {
 		return name;
@@ -43,5 +47,9 @@ public class Prodotto {
 
 	public void setPrezzo(double prezzo) {
 		this.prezzo = prezzo;
+	}
+	
+	public String getDescrizione() {
+		return this.descrizione;
 	}
 }

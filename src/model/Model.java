@@ -20,6 +20,7 @@ public class Model {
 	private HashMap<Integer, Rider> riders;
 	private HashMap<Integer, Restaurant> restaurants;
 	private boolean apiMode;
+	private boolean editJson;
 	
 	public Model() {
 		this.apiMode = true;
@@ -156,7 +157,7 @@ public class Model {
 					String ritiro = (String) jsonOrder.get("ritiro");
 					String consegna = (String) jsonOrder.get("consegna");
 					String indirizzo = (String) jsonOrder.get("indirizzo");
-					Order order = new Order(id, restaurant, ritiro, consegna, indirizzo);
+					Order order = new Order(id, null, restaurant, ritiro, consegna, indirizzo, -1, null, null, null, null, false);
 					orders.add(order);
 				}
 				loadOrders(orders);
@@ -194,20 +195,29 @@ public class Model {
 	private void readOrdersJson() {
 		String[] fileNames = {"resources\\db\\orders.json","db\\orders.json"};
 		JSONParser parser = new JSONParser();
+		boolean found = false;
 		
 		for(String filename : fileNames) {
 			try {
+				if(found) {
+					break;
+				}
 				FileReader reader = new FileReader(filename);
 				Object obj = parser.parse(reader);
+				found = true;
 				JSONArray jsonOrders = (JSONArray) obj;
 				List<Order> orders = new LinkedList<Order>();
 				for(int i = 0; i < jsonOrders.size(); i++) {
 					JSONObject jsonOrder = (JSONObject) jsonOrders.get(i);
 					int id = Integer.valueOf((String)jsonOrder.get("id"));
+					String nomePersona = (String) jsonOrder.get("nome");
 					String restaurant = (String) jsonOrder.get("ristorante");
 					String ritiro = (String) jsonOrder.get("ritiro");
 					String consegna = (String) jsonOrder.get("consegna");
 					String indirizzo = (String) jsonOrder.get("indirizzo");
+					int cap = Integer.valueOf((String) jsonOrder.get("cap"));
+					String email = (String) jsonOrder.get("email");
+					String tel = (String) jsonOrder.get("tel");
 					JSONArray productsOrder = (JSONArray) jsonOrder.get("prodotti");
 					List<Prodotto> prodotti = new LinkedList<Prodotto>();
 					for(int j = 0; j < productsOrder.size(); j++) {
@@ -220,11 +230,11 @@ public class Model {
 						prodotti.add(prodotto);
 					}
 					String note = (String) jsonOrder.get("note");
-					Order order = new Order(id, restaurant, ritiro, consegna, indirizzo, false, prodotti,note);
+					boolean completato = Boolean.parseBoolean((String) jsonOrder.get("completato"));
+					Order order = new Order(id, nomePersona, restaurant, ritiro, consegna, indirizzo, cap, email, tel, prodotti, note, completato);
 					orders.add(order);
 				}
 				loadOrders(orders);
-				break;
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -294,6 +304,5 @@ public class Model {
 				e.printStackTrace();
 			}
 		}
-	}
-
+	}	
 }

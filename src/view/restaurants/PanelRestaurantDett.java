@@ -7,12 +7,10 @@ import model.Restaurant;
 import view.MyPanel;
 
 public class PanelRestaurantDett extends MyPanel {
-	private Controller controller;
 	private PanelRestaurantsDettGeneral panelRestaurant;
 	private PanelRestaurantsDettProducts panelProducts;
 	
 	public PanelRestaurantDett() {
-		this.controller = Controller.getInstance();
 		this.getContentPane().setLayout(new GridLayout(1,2));
 		this.panelRestaurant = new PanelRestaurantsDettGeneral();
 		this.panelProducts = new PanelRestaurantsDettProducts();
@@ -34,8 +32,8 @@ public class PanelRestaurantDett extends MyPanel {
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		this.panelRestaurant.clear();
+		this.panelProducts.clear();
 	}
 
 	public void loadData(Restaurant restaurant) {
