@@ -19,7 +19,7 @@ import javax.swing.ScrollPaneConstants;
 
 public class MainMenu extends MyPanel {
 	private Controller controller;
-	private OrdersAndRidersPanel ordersAndRiders;
+	private PanelOrdersAndRiders ordersAndRiders;
 	private ConsolePanel console;
 	
 	public MainMenu() {
@@ -47,7 +47,7 @@ public class MainMenu extends MyPanel {
 		rightLower.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		// adding
-		ordersAndRiders = new OrdersAndRidersPanel();
+		ordersAndRiders = new PanelOrdersAndRiders();
 		leftUpper.add(ordersAndRiders);
 		
 		this.console = new ConsolePanel();
@@ -56,7 +56,7 @@ public class MainMenu extends MyPanel {
 
 	}
 	
-	public OrdersAndRidersPanel getOrdersAndRidersPanel() {
+	public PanelOrdersAndRiders getOrdersAndRidersPanel() {
 		return this.ordersAndRiders;
 	}
 	

@@ -5,10 +5,13 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableColumnModel;
+
+import controller.Controller;
 import model.Order;
 import view.NonEditableTableModel;
 
 public class OrdersTable extends JTable {
+	private Controller controller;
 	private static final int CODICE = 0;
 	private static final int NOMECOGNOME = 1;
 	private static final int RISTORANTE = 2;
@@ -24,14 +27,8 @@ public class OrdersTable extends JTable {
 		this.setModel(tableModel);
 	}
 	
-	public OrdersTable(List<Order> orders) {
-		tableModel = new NonEditableTableModel();
-		init();
-		loadRows(orders);
-		this.setModel(tableModel);
-	}
-	
 	private void init() {
+		controller = Controller.getInstance();
 		tableModel.addColumn("Codice");
 		tableModel.addColumn("Nome e Cognome");
 		tableModel.addColumn("Ristorante");
@@ -54,6 +51,7 @@ public class OrdersTable extends JTable {
 	}
 	
 	public void loadRows(List<Order> orders) {
+		clear();
 		for(Order order : orders) {
 			Object[] obj = {order.getId(), order.getNomeCognome(), order.getRistorante(), order.getRitiro(), order.getConsegna(), order.getIndirizzo(), (order.isCompleted())? "Completato" : "Non completato"};
 			tableModel.addRow(obj);

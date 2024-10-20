@@ -48,7 +48,9 @@ public class Rider {
 	}
 
 	public void assignOrder(Order order) {
-		this.assignedOrders.add(order);
+		if(!this.assignedOrders.contains(order)) {
+			this.assignedOrders.add(order);
+		}
 	}
 
 	public void removeOrder(Order order) {

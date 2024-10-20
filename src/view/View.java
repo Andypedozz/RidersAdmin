@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
 import controller.Controller;
+import view.assignorder.PanelAssignOrder;
 import view.orders.PanelOrders;
 import view.overview.FirstMenu;
 import view.overview.MainMenu;
@@ -18,10 +19,10 @@ public class View extends JFrame {
 	private TopToolbar toolbar;
 	private Navbar navbar;
 	private JPanel contentPanel;
-	private MainMenu mainMenu;
 	private PanelOrders ordersMenu;
 	private PanelRiders ridersMenu;
 	private PanelRestaurants restaurantsMenu;
+	private PanelAssignOrder panelAssignOrders;
 	
 	public View() {
 		this.controller = Controller.getInstance();
@@ -38,14 +39,11 @@ public class View extends JFrame {
 		this.getContentPane().add(toolbar, BorderLayout.NORTH);
 		this.getContentPane().add(getNavbar(), BorderLayout.WEST);
 		this.getContentPane().add(getContentPanel(), BorderLayout.CENTER);
-		this.mainMenu();
+		this.ordersMenu();
 		initListeners();
 	}
 	
 	private void initListeners() {
-		this.navbar.getOverviewBtn().addActionListener(e -> {
-			mainMenu();
-		});
 		
 		this.navbar.getOrdersBtn().addActionListener(e -> {
 			ordersMenu();
@@ -58,15 +56,14 @@ public class View extends JFrame {
 		this.navbar.getRestaurantsBtn().addActionListener(e -> {
 			restaurantsMenu();
 		});
+		
+		this.navbar.getOrdersRidersBtn().addActionListener(e -> {
+			assignOrdersMenu();
+		});
 	}
 	
 	public void firstMenu() {
 		this.setScreen(new FirstMenu());
-	}
-	
-	public void mainMenu() {
-		this.mainMenu = new MainMenu();
-		this.setScreen(this.mainMenu);
 	}
 	
 	public void ordersMenu() {
@@ -90,8 +87,9 @@ public class View extends JFrame {
 		this.revalidate();
 	}
 	
-	public MainMenu getMainMenu() {
-		return this.mainMenu;
+	private void assignOrdersMenu() {
+		this.panelAssignOrders = new PanelAssignOrder();
+		this.setScreen(this.panelAssignOrders);
 	}
 	
 	private Navbar getNavbar() {

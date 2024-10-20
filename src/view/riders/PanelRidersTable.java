@@ -55,6 +55,10 @@ public class PanelRidersTable extends MyPanel {
 		riders.forEach((id,rider) -> {
 			list.add(rider);
 		});
+		loadData(list);
+	}
+
+	private void loadData(List<Rider> list) {
 		this.table.loadRows(list);
 	}
 

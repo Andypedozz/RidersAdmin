@@ -5,11 +5,13 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableColumnModel;
 
+import controller.Controller;
 import model.Order;
 import model.Rider;
 import view.NonEditableTableModel;
 
 public class RidersTable extends JTable {
+	private Controller controller;
 	private static final int CODICE = 0;
 	private static final int NOME = 1;
 	private static final int MEZZO = 2;
@@ -31,6 +33,7 @@ public class RidersTable extends JTable {
 	}
 	
 	private void init() {
+		controller = Controller.getInstance();
 		tableModel.addColumn("ID");
 		tableModel.addColumn("Nome");
 		tableModel.addColumn("Mezzo");
@@ -45,13 +48,19 @@ public class RidersTable extends JTable {
 	}
 	
 	public void loadRows(List<Rider> riders) {
-		
+		clear();
 		for(Rider rider : riders) {
 			Object[] obj = {rider.getId(), rider.getName(), rider.getMezzo(), (rider.isLibero())? "Libero" : "Occupato"};
 			tableModel.addRow(obj);
 		}
 	}
 	
+	private void clear() {
+		this.tableModel = new NonEditableTableModel();
+		this.setModel(tableModel);
+		init();
+	}
+
 	public Rider getSelected() {
 		Rider rider = null;
 		int selectedRow = super.getSelectedRow();

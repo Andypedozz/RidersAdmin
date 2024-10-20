@@ -53,17 +53,11 @@ public class Controller {
 	
 	public void removeOrder(Order order) {
 		boolean result = this.model.removeOrder(order);
-		if(result) {
-			this.view.getMainMenu().getConsolePanel().append("Deleted order "+order.getId());
-		}else {
-			this.view.getMainMenu().getConsolePanel().append("Error in HTTP delete request");
-		}
 	}
 
 	public void setCompleted(Order order) {
 		Order order1 = this.model.getOrder(order.getId());
 		order1.setCompleted(true);
-		this.view.getMainMenu().getConsolePanel().append("Set order "+order.getId()+" as completed");
 	}
 	
 }

@@ -20,10 +20,7 @@ import view.MyPanel;
 public class PanelOrdersTable extends MyPanel {
 	private Controller controller;
 	private OrdersTable table;
-	private JButton viewInfo;
-	private JButton addToRider;
-	private JButton completed;
-	private JButton removeOrder;
+	private JButton assignOrder;
 	private JButton updateOrders;
 	
 	public PanelOrdersTable() {
@@ -36,51 +33,20 @@ public class PanelOrdersTable extends MyPanel {
     	
 		JToolBar toolBar = new JToolBar();
 		
-		viewInfo = new JButton("Info");
-		viewInfo.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-		addToRider = new JButton("Assegna");
-		addToRider.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-		completed = new JButton("Completa");
-		completed.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-		removeOrder = new JButton("Rimuovi");
-		removeOrder.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+		assignOrder = new JButton("Assegna");
+		assignOrder.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		updateOrders = new JButton("Aggiorna");
 		updateOrders.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		
-		toolBar.add(addToRider);
-		toolBar.add(completed);
-		toolBar.add(removeOrder);
+		toolBar.add(assignOrder);
 		toolBar.add(updateOrders);
     	
 		this.getContentPane().add(scrollPane, BorderLayout.CENTER);
 		this.getContentPane().add(toolBar, BorderLayout.SOUTH);
-		initListeners();
 		updateFields();
 	}
 	
-	private void initListeners() {
-		this.removeOrder.addActionListener(e -> {
-			Order order = this.table.getSelected();
-			if(order != null) {
-				controller.removeOrder(order);
-				updateFields();				
-			}
-		});
 		
-		this.completed.addActionListener(e -> {
-			Order order = this.table.getSelected();
-			if(order != null) {
-				controller.setCompleted(order);
-				updateFields();
-			}
-		});
-		
-		this.updateOrders.addActionListener(e -> {
-			controller.loadOrders();
-			updateFields();
-		});
-	}
-
 	@Override
 	public void updateFields() {
 		this.table.clear();
@@ -89,14 +55,26 @@ public class PanelOrdersTable extends MyPanel {
 		orders.forEach((id,order) -> {
 			list.add(order);
 		});
-		loadOrders(list);
+		loadData(list);
 	}
 	
+	
+	
+	public JButton getAssignOrderBtn() {
+		return assignOrder;
+	}
+
+
+	public JButton getUpdateOrdersBtn() {
+		return updateOrders;
+	}
+
+
 	public OrdersTable getTable() {
 		return this.table;
 	}
 	
-	private void loadOrders(List<Order> orders) {
+	private void loadData(List<Order> orders) {
 		this.table.loadRows(orders);
 	}
 

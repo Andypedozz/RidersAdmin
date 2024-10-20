@@ -29,8 +29,8 @@ public class PanelOrders extends MyPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Order order = panelTable.getTable().getSelected();
-				order = controller.getOrders().get(order.getId());
 				if(order != null) {
+					order = controller.getOrders().get(order.getId());
 					panelDett.loadData(order);
 				}
 			}

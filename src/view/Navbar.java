@@ -13,33 +13,29 @@ public class Navbar extends JPanel {
 	private static final int N_BUTTONS = 4;
 	
 	private JScrollPane scrollPane;
-	private JButton mainMenu;
 	private JButton orders;
 	private JButton riders;
 	private JButton restaurants;
+	private JButton ordersRiders;
 	
 	public Navbar() {
-		mainMenu = new JButton("Generale");
 		orders = new JButton("Ordini");
 		riders = new JButton("Rider");
 		restaurants = new JButton("Ristoranti");
+		ordersRiders = new JButton("Assegnazione ordini");
 		
 		JPanel contentPanel = new JPanel();
 		GridLayout gl_contentPanel = new GridLayout(4, 1);
 		gl_contentPanel.setVgap(10);
 		contentPanel.setLayout(gl_contentPanel);
-		contentPanel.add(mainMenu);
 		contentPanel.add(orders);
 		contentPanel.add(riders);
 		contentPanel.add(restaurants);
+		contentPanel.add(ordersRiders);
 		
 		scrollPane = new JScrollPane(contentPanel);
 		this.add(scrollPane);
 		this.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-	}
-	
-	public JButton getOverviewBtn() {
-		return this.mainMenu;
 	}
 	
 	public JButton getOrdersBtn() {
@@ -52,5 +48,9 @@ public class Navbar extends JPanel {
 	
 	public JButton getRestaurantsBtn() {
 		return this.restaurants;
+	}
+	
+	public JButton getOrdersRidersBtn() {
+		return this.ordersRiders;
 	}
 }
