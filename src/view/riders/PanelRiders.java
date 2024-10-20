@@ -3,6 +3,10 @@ package view.riders;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import controller.Controller;
 import model.Rider;
 import view.MyPanel;
@@ -24,16 +28,17 @@ public class PanelRiders extends MyPanel {
 	}
 	
 	private void initListeners() {
-		this.tablePanel.getTable().addMouseListener(new MouseAdapter() {
-		
-			public void mouseClicked(MouseEvent e) {
+
+		this.tablePanel.getTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
 				Rider rider = tablePanel.getTable().getSelected();
 				rider = controller.getRiders().get(rider.getId());
 				if(rider != null) {
 					panelDett.loadData(rider);
 				}
 			}
-			
 		});
 	}
 	

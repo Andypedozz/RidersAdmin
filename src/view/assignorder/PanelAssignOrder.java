@@ -4,6 +4,9 @@ import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import controller.Controller;
 import model.Order;
 import model.Rider;
@@ -29,17 +32,16 @@ public class PanelAssignOrder extends MyPanel {
 	
 	private void initListeners() {
 		
-		this.panelOrdersAndRiders.getRidersPanel().getTable().addMouseListener(new MouseAdapter() {
-		
+		this.panelOrdersAndRiders.getRidersPanel().getTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void valueChanged(ListSelectionEvent e) {
 				Rider rider = panelOrdersAndRiders.getRidersPanel().getTable().getSelected();
 				if(rider != null) {
 					rider = controller.getRiders().get(rider.getId());
 					panelOrdersRidersTable.loadData(rider);
 				}
 			}
-			
 		});
 		
 		this.panelOrdersRidersTable.getRemoveOrder().addActionListener(e -> {

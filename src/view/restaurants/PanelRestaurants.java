@@ -4,6 +4,9 @@ import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import controller.Controller;
 import model.Restaurant;
 import view.MyPanel;
@@ -24,17 +27,17 @@ public class PanelRestaurants extends MyPanel {
 	}
 	
 	private void initListeners() {
-		this.panelTable.getTable().addMouseListener(new MouseAdapter() {
 		
+		this.panelTable.getTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void valueChanged(ListSelectionEvent e) {
 				Restaurant restaurant = panelTable.getTable().getSelected();
-				restaurant = controller.getRestaurants().get(restaurant.getId());
 				if(restaurant != null) {
+					restaurant = controller.getRestaurants().get(restaurant.getId());
 					panelDett.loadData(restaurant);
 				}
 			}
-			
 		});
 	}
 	
