@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JToolBar;
+
 import controller.Controller;
 import view.orders.PanelOrders;
 import view.overview.FirstMenu;
@@ -13,6 +15,7 @@ import view.riders.PanelRiders;
 
 public class View extends JFrame {
 	private Controller controller;
+	private TopToolbar toolbar;
 	private Navbar navbar;
 	private JPanel contentPanel;
 	private MainMenu mainMenu;
@@ -22,6 +25,7 @@ public class View extends JFrame {
 	
 	public View() {
 		this.controller = Controller.getInstance();
+		this.setTitle("RidersApp");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(1200,900);
 		this.setResizable(true);
@@ -29,6 +33,9 @@ public class View extends JFrame {
 		this.setVisible(true);
 		getContentPanel().setLayout(new GridLayout(1,1));
 		this.getContentPane().setLayout(new BorderLayout());
+		
+		toolbar = new TopToolbar();
+		this.getContentPane().add(toolbar, BorderLayout.NORTH);
 		this.getContentPane().add(getNavbar(), BorderLayout.WEST);
 		this.getContentPane().add(getContentPanel(), BorderLayout.CENTER);
 		this.mainMenu();

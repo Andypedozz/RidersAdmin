@@ -11,6 +11,7 @@ public class Order {
 	private String indirizzo;
 	private boolean completed;
 	private List<Prodotto> listaProdotti;
+	private String note;
 	
 	public Order(int id, String ristorante, String ritiro, String consegna, String indirizzo) {
 		this.id = id;
@@ -20,9 +21,10 @@ public class Order {
 		this.indirizzo = indirizzo;
 		this.completed = false;
 		this.listaProdotti = new LinkedList<Prodotto>();
+		this.note = "";
 	}
 	
-	public Order(int id, String ristorante, String ritiro, String consegna, String indirizzo, boolean completed) {
+	public Order(int id, String ristorante, String ritiro, String consegna, String indirizzo, boolean completed, String note) {
 		this.id = id;
 		this.ristorante = ristorante;
 		this.ritiro = ritiro;
@@ -30,9 +32,10 @@ public class Order {
 		this.indirizzo = indirizzo;
 		this.completed = completed;
 		this.listaProdotti = new LinkedList<Prodotto>();
+		this.note = note;
 	}
 	
-	public Order(int id, String ristorante, String ritiro, String consegna, String indirizzo, boolean completed, List<Prodotto> prodotti) {
+	public Order(int id, String ristorante, String ritiro, String consegna, String indirizzo, boolean completed, List<Prodotto> prodotti, String note) {
 		this.id = id;
 		this.ristorante = ristorante;
 		this.ritiro = ritiro;
@@ -40,6 +43,7 @@ public class Order {
 		this.indirizzo = indirizzo;
 		this.completed = completed;
 		this.listaProdotti = prodotti;
+		this.note = note;
 	}
 	
 	public List<Prodotto> getListaProdotti() {
@@ -91,5 +95,9 @@ public class Order {
 
 	public void setCompleted(boolean b) {
 		this.completed = b;
+	}
+	
+	public String getNote() {
+		return this.note;
 	}
 }

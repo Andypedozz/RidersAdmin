@@ -15,11 +15,11 @@ public class PanelOrders extends MyPanel {
 	
 	public PanelOrders() {
 		this.controller = Controller.getInstance();
-		this.setLayout(new GridLayout(2,1));
+		this.getContentPane().setLayout(new GridLayout(2,1));
 		this.panelDett = new PanelOrderDett();
 		this.panelTable = new PanelOrdersTable();
-		this.add(panelDett);
-		this.add(panelTable);
+		this.getContentPane().add(panelDett);
+		this.getContentPane().add(panelTable);
 		initListeners();
 	}
 	
@@ -29,6 +29,7 @@ public class PanelOrders extends MyPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Order order = panelTable.getTable().getSelected();
+				order = controller.getOrders().get(order.getId());
 				if(order != null) {
 					panelDett.loadData(order);
 				}
@@ -39,7 +40,6 @@ public class PanelOrders extends MyPanel {
 	
 	@Override
 	public void updateFields() {
-		this.panelDett.updateFields();
 		this.panelTable.updateFields();
 	}
 

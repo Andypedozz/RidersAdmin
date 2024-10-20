@@ -14,11 +14,11 @@ public class PanelOrderDett extends MyPanel {
 	
 	public PanelOrderDett() {
 		this.controller = Controller.getInstance();
-		this.setLayout(new GridLayout(1,2));
+		this.getContentPane().setLayout(new GridLayout(1,2));
 		this.panelOrder = new PanelOrderDettGeneral();
 		this.panelProducts = new PanelOrderDettProducts();
-		add(panelOrder);
-		add(panelProducts);
+		getContentPane().add(panelOrder);
+		getContentPane().add(panelProducts);
 	}
 
 	@Override
@@ -41,6 +41,7 @@ public class PanelOrderDett extends MyPanel {
 	public void loadData(Order order) {
 		this.panelOrder.loadData(order);
 		this.panelProducts.loadData(order);
+		this.revalidate();
 	}
 
 }

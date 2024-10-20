@@ -28,15 +28,10 @@ public class PanelOrdersTable extends MyPanel {
 	
 	public PanelOrdersTable() {
 		this.controller = Controller.getInstance();
-		this.setLayout(new BorderLayout());
-		
+		this.setTitle("Ordini");
+		this.getContentPane().setLayout(new BorderLayout());
 		table = new OrdersTable();
 		
-    	table.getTableHeader().setReorderingAllowed(false);
-    	table.setColumnSelectionAllowed(false);
-    	table.setCellSelectionEnabled(false);
-    	table.setRowSelectionAllowed(true);
-    	
     	JScrollPane scrollPane = new JScrollPane(table);
     	
 		JToolBar toolBar = new JToolBar();
@@ -52,15 +47,13 @@ public class PanelOrdersTable extends MyPanel {
 		updateOrders = new JButton("Aggiorna");
 		updateOrders.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		
-		toolBar.add(viewInfo);
 		toolBar.add(addToRider);
 		toolBar.add(completed);
 		toolBar.add(removeOrder);
 		toolBar.add(updateOrders);
     	
-		add(scrollPane, BorderLayout.CENTER);
-		add(scrollPane, BorderLayout.CENTER);
-		add(toolBar, BorderLayout.SOUTH);
+		this.getContentPane().add(scrollPane, BorderLayout.CENTER);
+		this.getContentPane().add(toolBar, BorderLayout.SOUTH);
 		initListeners();
 		updateFields();
 	}

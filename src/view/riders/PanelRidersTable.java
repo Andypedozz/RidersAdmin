@@ -23,7 +23,8 @@ public class PanelRidersTable extends MyPanel {
 
 	public PanelRidersTable( ) {
 		this.controller = Controller.getInstance();
-		this.setLayout(new BorderLayout());
+		this.setTitle("Riders");
+		this.getContentPane().setLayout(new BorderLayout());
     	
 		table = new RidersTable();
 		
@@ -32,29 +33,23 @@ public class PanelRidersTable extends MyPanel {
     	table.setCellSelectionEnabled(false);
     	table.setRowSelectionAllowed(true);
     	
-    	JLabel title = new JLabel("Riders");
-    	title.setHorizontalAlignment(SwingConstants.CENTER);
     	
     	JScrollPane scrollPane = new JScrollPane(table);
 		
 		JToolBar toolbar = new JToolBar();
 		viewInfo = new JButton("Info");
 		viewInfo.setBorder(new LineBorder(new Color(192, 192, 192), 1, true));
-		toolbar.add(viewInfo);
 		
-		add(title, BorderLayout.NORTH);
-		add(scrollPane, BorderLayout.CENTER);
-		add(toolbar, BorderLayout.SOUTH);
+		getContentPane().add(scrollPane, BorderLayout.CENTER);
+		getContentPane().add(toolbar, BorderLayout.SOUTH);
     }
 	
-	private void initListeners() {
-		this.viewInfo.addActionListener(e -> {
-		});
+	public RidersTable getTable() {
+		return this.table;
 	}
 
 	@Override
 	public void updateFields() {
-		// TODO Auto-generated method stub
 		HashMap<Integer,Rider> riders = controller.getRiders();
 		List<Rider> list = new LinkedList<Rider>();
 		riders.forEach((id,rider) -> {

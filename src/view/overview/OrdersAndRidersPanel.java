@@ -13,13 +13,13 @@ public class OrdersAndRidersPanel extends MyPanel {
 	
 	public OrdersAndRidersPanel() {
 		this.controller = Controller.getInstance();
-		this.setLayout(new GridLayout(1,2));
+		this.getContentPane().setLayout(new GridLayout(1,2));
 		
 		this.ordersPanel = new PanelOrdersTable();
 		this.ridersPanel = new PanelRidersTable();
 		
-		this.add(ordersPanel);
-		this.add(ridersPanel);
+		this.getContentPane().add(ordersPanel);
+		this.getContentPane().add(ridersPanel);
 	}
 	
 	public PanelOrdersTable getOrdersPanel() {

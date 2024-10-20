@@ -1,0 +1,126 @@
+[
+    {
+        "id" : "0",
+        "nome" : "Morso di Romagna",
+        "indirizzo" : "Via Nolfi 37",
+        "prodotti" : [
+            {
+                "id" : "0",
+                "nome" : "Crescione Gratin",
+                "prezzo" : "3.50",
+                "descrizione" : "Crescione al gratin"
+            },
+            {
+                "id" : "1",
+                "nome" : "Crescione mozzarella e pomodoro",
+                "prezzo" : "3.50",
+                "descrizione" : "Crescione con mozzarella e pomodoro"
+            },
+            {
+                "id" : "2",
+                "nome" : "Crescione alle erbe",
+                "prezzo" : "3.60",
+                "descrizione" : "Crescione con Erbe"
+            },
+            {
+                "id" : "3",
+                "nome" : "Piadina Romagnola",
+                "prezzo" : "3.50",
+                "descrizione" : "Piadina di Romagna"
+            }
+        ]
+    },
+    {
+        "id" : "1",
+        "nome" : "Mikaku",
+        "indirizzo" : "Via del Cassero 20",
+        "prodotti" : [
+            {
+                "id" : "0",
+                "nome" : "Uramaki Ebi",
+                "prezzo" : "8.00",
+                "descrizione" : "Involtini di riso con gambero e philadelfia"
+            },
+            {
+                "id" : "1",
+                "nome" : "Nigiri Salmone",
+                "prezzo" : "6.00",
+                "descrizione" : "Involtini di riso e fetta di salmone"
+            },
+            {
+                "id" : "2",
+                "nome" : "Pollo fritto",
+                "prezzo" : "6.00",
+                "descrizione" : "Pollo fritto"
+            },
+            {
+                "id" : "3",
+                "nome" : "Ramen",
+                "prezzo" : "10.00",
+                "descrizione" : "Zuppa con carne e verdure"
+            }
+        ]
+    },
+    {
+        "id" : "2",
+        "nome" : "Fornaccia e Party",
+        "indirizzo" : "Via Ponte Metauro 14",
+        "prodotti" : [
+            {
+                "id" : "0",
+                "nome" : "Pizza salsiccia e patate",
+                "prezzo" : "7.50",
+                "descrizione" : "Pizza base rossa con salsiccia e patate"
+            },
+            {
+                "id" : "1",
+                "nome" : "Pizza funghi e salsiccia",
+                "prezzo" : "7.50",
+                "descrizione" : "Pizza base rossa con funghi e salsiccia"
+            },
+            {
+                "id" : "2",
+                "nome" : "Americana",
+                "prezzo" : "7.50",
+                "descrizione" : "Pizza base rossa con mozzarella patate fritte e wurstel"
+            },
+            {
+                "id" : "3",
+                "nome" : "Margherita",
+                "prezzo" : "6.50",
+                "descrizione" : "Pizza Margherita"
+            }
+        ]
+    },
+    {
+        "id" : "3",
+        "nome" : "Hollibis Pizzeria",
+        "indirizzo" : "Via della Repubblica 18",
+        "prodotti" : [
+            {
+                "id" : "0",
+                "nome" : "Margherita",
+                "prezzo" : "6.00",
+                "descrizione" : "Pizza Margherita"
+            },
+            {
+                "id" : "1",
+                "nome" : "Bufalina",
+                "prezzo" : "7.00",
+                "descrizione" : "Pizza base rossa con mozzarella di bufala"
+            },
+            {
+                "id" : "2",
+                "nome" : "Diavola",
+                "prezzo" : "7.00",
+                "descrizione" : "Pizza Margherita con salame piccante"
+            },
+            {
+                "id" : "3",
+                "nome" : "Vegetariana",
+                "prezzo" : "6.50",
+                "descrizione" : "Pizza base rossa con verdure"
+            }
+        ]
+    }
+]

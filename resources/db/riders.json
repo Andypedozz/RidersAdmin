@@ -1,0 +1,62 @@
+[
+    {
+        "id" : "0",
+        "nome" : "Andrea",
+        "mezzo" : "Auto",
+        "libero" : "true"
+    },
+    {
+        "id" : "1",
+        "nome" : "Luca",
+        "mezzo" : "Scooter",
+        "libero" : "true"
+    },
+    {
+        "id" : "2",
+        "nome" : "Gianmarco",
+        "mezzo" : "Moto",
+        "libero" : "true"
+    },
+    {
+        "id" : "3",
+        "nome" : "Federica",
+        "mezzo" : "Mono",
+        "libero" : "true"
+    },
+    {
+        "id" : "4",
+        "nome" : "Giacomo",
+        "mezzo" : "Bici",
+        "libero" : "true"
+    },
+    {
+        "id" : "5",
+        "nome" : "Lucia",
+        "mezzo" : "Auto",
+        "libero" : "true"
+    },
+    {
+        "id" : "6",
+        "nome" : "Giulio",
+        "mezzo" : "Auto",
+        "libero" : "true"
+    },
+    {
+        "id" : "7",
+        "nome" : "Maria",
+        "mezzo" : "Scooter",
+        "libero" : "true"
+    },
+    {
+        "id" : "8",
+        "nome" : "Francesco",
+        "mezzo" : "Auto",
+        "libero" : "true"
+    },
+    {
+        "id" : "9",
+        "nome" : "Mattia",
+        "mezzo" : "Moto",
+        "libero" : "true"
+    }
+]

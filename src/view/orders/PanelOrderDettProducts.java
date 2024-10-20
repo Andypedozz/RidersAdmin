@@ -1,8 +1,15 @@
 package view.orders;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
+
 import controller.Controller;
 import model.Order;
 import model.Prodotto;
@@ -11,10 +18,12 @@ import view.MyPanel;
 public class PanelOrderDettProducts extends MyPanel {
 	private Controller controller;
 	private JScrollPane scrollPane;
-	private JPanel contentPanel;
+	private JPanel dataPanel;
 	
 	public PanelOrderDettProducts() {
-		this.contentPanel = new JPanel();
+		this.setTitle("Prodotti");
+		this.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+		this.getContentPane().setLayout(new GridLayout());
 	}
 
 	@Override
@@ -31,19 +40,21 @@ public class PanelOrderDettProducts extends MyPanel {
 
 	@Override
 	public void clear() {
-		this.removeAll();
+		this.getContentPane().removeAll();
 	}
 
 	public void loadData(Order order) {
 		clear();
-		this.contentPanel.setLayout(new GridLayout(order.getListaProdotti().size(),1));
+		this.dataPanel = new JPanel();
+		this.dataPanel.setLayout(new GridLayout(order.getListaProdotti().size(),1));
 		for(Prodotto prodotto : order.getListaProdotti()) {
-			ProductCard card = new ProductCard();
+			OrderProductCard card = new OrderProductCard();
 			card.loadData(prodotto);
-			this.contentPanel.add(card);
+			this.dataPanel.add(card);
 		}
-		this.scrollPane = new JScrollPane(contentPanel);
-		this.add(scrollPane);
+		this.scrollPane = new JScrollPane(dataPanel);
+		this.scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+		this.getContentPane().add(scrollPane, BorderLayout.CENTER);
 	}
 
 }
