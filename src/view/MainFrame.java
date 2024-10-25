@@ -2,10 +2,8 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import view.assignorder.PanelAssignOrder;
 import view.orders.PanelOrders;
 import view.restaurants.PanelRestaurants;
@@ -71,16 +69,17 @@ public class MainFrame extends JFrame {
 		this.setScreen(this.restaurantsMenu);
 	}
 	
+	private void assignOrdersMenu() {
+		this.panelAssignOrders = new PanelAssignOrder();
+		this.setScreen(this.panelAssignOrders);
+	}
+	
 	private void setScreen(JPanel panel) {
 		this.contentPanel.removeAll();
 		this.contentPanel.add(panel);
 		this.revalidate();
 	}
 	
-	private void assignOrdersMenu() {
-		this.panelAssignOrders = new PanelAssignOrder();
-		this.setScreen(this.panelAssignOrders);
-	}
 	
 	private Navbar getNavbar() {
 		if(this.navbar == null) {

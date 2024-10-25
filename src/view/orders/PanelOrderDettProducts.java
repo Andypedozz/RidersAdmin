@@ -21,7 +21,6 @@ public class PanelOrderDettProducts extends MyPanel {
 	
 	public PanelOrderDettProducts() {
 		this.setTitle("Prodotti");
-		this.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 		this.getContentPane().setLayout(new GridLayout());
 	}
 

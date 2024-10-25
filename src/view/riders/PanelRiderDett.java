@@ -1,5 +1,6 @@
 package view.riders;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -120,7 +121,7 @@ public class PanelRiderDett extends MyPanel {
 		gbc_checkBoxLibero.gridy = 4;
 		getContentPane().add(checkBoxLibero, gbc_checkBoxLibero);
 		
-		this.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+		this.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 		
 		this.textFieldCodice.setEditable(false);
 		this.textFieldNome.setEditable(false);

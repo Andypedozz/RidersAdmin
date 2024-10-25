@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
@@ -35,7 +36,7 @@ public class Navbar extends JPanel {
 		
 		scrollPane = new JScrollPane(contentPanel);
 		this.add(scrollPane);
-		this.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+		this.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 	}
 	
 	public JButton getOrdersBtn() {
@@ -53,4 +54,5 @@ public class Navbar extends JPanel {
 	public JButton getOrdersRidersBtn() {
 		return this.ordersRiders;
 	}
+	
 }

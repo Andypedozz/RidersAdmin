@@ -28,21 +28,17 @@ public class MainMenu extends MyPanel {
 		
 		// adding main panels
 		JPanel leftUpper = new JPanel();
-		leftUpper.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		this.getContentPane().add(leftUpper);
 		leftUpper.setLayout(new GridLayout(1, 2, 0, 0));
 		
 		JPanel rightUpper = new JPanel();
-		rightUpper.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		this.getContentPane().add(rightUpper);
 		rightUpper.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JPanel leftLower = new JPanel();
-		leftLower.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		this.getContentPane().add(leftLower);
 		
 		JPanel rightLower = new JPanel();
-		rightLower.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		this.getContentPane().add(rightLower);
 		rightLower.setLayout(new GridLayout(1, 0, 0, 0));
 		

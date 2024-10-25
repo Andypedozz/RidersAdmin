@@ -177,8 +177,6 @@ public class PanelOrderDettGeneral extends MyPanel {
 		gbc_textFieldIndirizzo.gridy = 6;
 		this.getContentPane().add(textFieldIndirizzoConsegna, gbc_textFieldIndirizzo);
 		
-		this.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-		
 		lblCap = new JLabel("Cap");
 		lblCap.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_lblCap = new GridBagConstraints();

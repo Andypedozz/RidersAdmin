@@ -25,7 +25,6 @@ public class PanelOrdersRidersTable extends MyPanel {
 		table = new OrdersTable();
 		
 		removeOrder = new JButton("Rimuovi ordine da Rider");
-		removeOrder.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		
 		JToolBar toolBar = new JToolBar();
 		toolBar.add(removeOrder);
