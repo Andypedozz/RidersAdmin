@@ -25,6 +25,7 @@ public class PanelOrders extends MyPanel {
 		this.panelTable = new PanelOrdersTable();
 		this.getContentPane().add(panelDett);
 		this.getContentPane().add(panelTable);
+		this.panelTable.getAssignOrderBtn().setVisible(false);
 		initListeners();
 	}
 	
@@ -41,6 +42,10 @@ public class PanelOrders extends MyPanel {
 				}
 			}
 		});
+		
+		this.panelTable.getClearBtn().addActionListener(e -> {
+			clear();
+		});
 	}
 	
 	@Override
@@ -56,8 +61,7 @@ public class PanelOrders extends MyPanel {
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		this.panelDett.clear();
 	}
 
 }

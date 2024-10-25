@@ -34,8 +34,8 @@ public class PanelOrderDett extends MyPanel {
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		panelOrder.clear();
+		panelProducts.clear();
 	}
 
 	public void loadData(Order order) {

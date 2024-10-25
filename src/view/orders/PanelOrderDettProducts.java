@@ -40,6 +40,7 @@ public class PanelOrderDettProducts extends MyPanel {
 	@Override
 	public void clear() {
 		this.getContentPane().removeAll();
+		this.revalidate();
 	}
 
 	public void loadData(Order order) {

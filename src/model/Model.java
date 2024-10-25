@@ -176,7 +176,7 @@ public class Model {
 	}
 	
 	private void fetchRestaurants() {
-		
+
 	}
 	
 	private void fetchRiders() {
@@ -195,49 +195,84 @@ public class Model {
 	private void readOrdersJson() {
 		String[] fileNames = {"resources\\db\\orders.json","db\\orders.json"};
 		JSONParser parser = new JSONParser();
+		Object obj = null;
 		boolean found = false;
 		
-		for(String filename : fileNames) {
+		if(isApiMode()) {
 			try {
-				if(found) {
-					break;
-				}
-				FileReader reader = new FileReader(filename);
-				Object obj = parser.parse(reader);
-				found = true;
-				JSONArray jsonOrders = (JSONArray) obj;
-				List<Order> orders = new LinkedList<Order>();
-				for(int i = 0; i < jsonOrders.size(); i++) {
-					JSONObject jsonOrder = (JSONObject) jsonOrders.get(i);
-					int id = Integer.valueOf((String)jsonOrder.get("id"));
-					String nomePersona = (String) jsonOrder.get("nome");
-					String restaurant = (String) jsonOrder.get("ristorante");
-					String ritiro = (String) jsonOrder.get("ritiro");
-					String consegna = (String) jsonOrder.get("consegna");
-					String indirizzo = (String) jsonOrder.get("indirizzo");
-					int cap = Integer.valueOf((String) jsonOrder.get("cap"));
-					String email = (String) jsonOrder.get("email");
-					String tel = (String) jsonOrder.get("tel");
-					JSONArray productsOrder = (JSONArray) jsonOrder.get("prodotti");
-					List<Prodotto> prodotti = new LinkedList<Prodotto>();
-					for(int j = 0; j < productsOrder.size(); j++) {
-						JSONObject product = (JSONObject) productsOrder.get(j);
-						int idProdotto = Integer.parseInt((String) product.get("id"));
-						String nome = (String) product.get("nome");
-						int quantita = Integer.valueOf((String) product.get("quantita"));
-						double prezzo = Double.parseDouble((String) product.get("prezzo"));
-						Prodotto prodotto = new Prodotto(idProdotto, nome, quantita, prezzo);
-						prodotti.add(prodotto);
+				URL url = new URL("http://localhost:3001/orders");
+				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+				conn.setRequestMethod("GET");
+				conn.connect();
+				
+				// Getting the response code
+				int responseCode = conn.getResponseCode();
+				if(responseCode != 200) {
+					throw new RuntimeException("HttpResponseCode: "+ responseCode);
+				}else {
+					String inline = "";
+					Scanner scanner = new Scanner(url.openStream());
+					
+					// Write all the JSON data into a string
+					while(scanner.hasNext()) {
+						inline += scanner.nextLine();
 					}
-					String note = (String) jsonOrder.get("note");
-					boolean completato = Boolean.parseBoolean((String) jsonOrder.get("completato"));
-					Order order = new Order(id, nomePersona, restaurant, ritiro, consegna, indirizzo, cap, email, tel, prodotti, note, completato);
-					orders.add(order);
+					
+					scanner.close();
+					
+					JSONParser parse = new JSONParser();
+					obj = parse.parse(inline);
 				}
-				loadOrders(orders);
 			}catch(Exception e) {
 				e.printStackTrace();
+				found = false;
 			}
+		}else {
+			for(String filename : fileNames) {
+				try {
+					if(found) {
+						break;
+					}
+					FileReader reader = new FileReader(filename);
+					obj = parser.parse(reader);
+					found = true;
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		if(found) {
+			JSONArray jsonOrders = (JSONArray) obj;
+			List<Order> orders = new LinkedList<Order>();
+			for(int i = 0; i < jsonOrders.size(); i++) {
+				JSONObject jsonOrder = (JSONObject) jsonOrders.get(i);
+				int id = Integer.valueOf((String)jsonOrder.get("id"));
+				String nomePersona = (String) jsonOrder.get("nome");
+				String restaurant = (String) jsonOrder.get("ristorante");
+				String ritiro = (String) jsonOrder.get("ritiro");
+				String consegna = (String) jsonOrder.get("consegna");
+				String indirizzo = (String) jsonOrder.get("indirizzo");
+				int cap = Integer.valueOf((String) jsonOrder.get("cap"));
+				String email = (String) jsonOrder.get("email");
+				String tel = (String) jsonOrder.get("tel");
+				JSONArray productsOrder = (JSONArray) jsonOrder.get("prodotti");
+				List<Prodotto> prodotti = new LinkedList<Prodotto>();
+				for(int j = 0; j < productsOrder.size(); j++) {
+					JSONObject product = (JSONObject) productsOrder.get(j);
+					int idProdotto = Integer.parseInt((String) product.get("id"));
+					String nome = (String) product.get("nome");
+					int quantita = Integer.valueOf((String) product.get("quantita"));
+					double prezzo = Double.parseDouble((String) product.get("prezzo"));
+					Prodotto prodotto = new Prodotto(idProdotto, nome, quantita, prezzo);
+					prodotti.add(prodotto);
+				}
+				String note = (String) jsonOrder.get("note");
+				boolean completato = Boolean.parseBoolean((String) jsonOrder.get("completato"));
+				Order order = new Order(id, nomePersona, restaurant, ritiro, consegna, indirizzo, cap, email, tel, prodotti, note, completato);
+				orders.add(order);
+			}
+			loadOrders(orders);
 		}
 	}
 	
